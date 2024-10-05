@@ -1,16 +1,16 @@
-import * as cdk from "aws-cdk-lib";
+import { Stack, StackProps } from "aws-cdk-lib";
 import { Construct } from "constructs";
-import * as lambda from "aws-cdk-lib/aws-lambda";
+import { Architecture, Runtime } from "aws-cdk-lib/aws-lambda";
 import { GoFunction } from "@aws-cdk/aws-lambda-go-alpha";
 
-export class CdkStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+export class CdkStack extends Stack {
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
     new GoFunction(this, "HelloWorldLambdaFunction", {
       entry: "../lambdas/hello-world",
-      architecture: lambda.Architecture.ARM_64,
-      runtime: lambda.Runtime.PROVIDED_AL2023,
+      architecture: Architecture.ARM_64,
+      runtime: Runtime.PROVIDED_AL2023,
       functionName: "HelloWorldLambdaFunction",
     });
   }
